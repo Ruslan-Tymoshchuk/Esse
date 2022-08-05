@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>All Carts</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+</head>
+
+<body>
+
+<div class="container my-5">
+<div class="card">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th class="text-center" scope="col" style="width: 10%;">ID</th>
+        <th class="text-center" scope="col" style="width: 35%;">Document</th>
+        <th class="text-center" scope="col" style="width: 35%;">Dictionary</th>
+        <th class="text-center" scope="col" style="width: 20%;">Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="cart : ${allCarts}">
+        <td class="text-center" th:text="${cart.id}"></td>
+        <td class="text-center" th:text="${#temporals.format(cart.document.date, 'dd-MM-yyyy')}"></td>
+        <td class="text-center"th:text="${cart.dictionary.name}"></td>
+        <td class="text-center"><a th:href="@{/carts/{id}(id=${cart.id})}">Open</a></td>
+     </tr>
+    </tbody>
+  </table>
+</div>
+
+ <div class="row my-3">
+  <form th:method="post" th:action="@{/carts/save}" th:object="${cartDto}">
+    <label for="date">Date</label>
+    <input type="date" th:field="*{document.date}" id="date">
+    <label for="date">Dictionary Name</label>
+    <input type="text" th:field="*{dictionary.name}" id="name">
+    <input type="submit" value="Add Cart">
+  </form>
+ </div>
+ 
+  <div class="row">
+    <a th:href="@{/(sort = NAME)}">Sort By Name</a>
+    <a th:href="@{/(sort = DATE)}">Sort By Date</a>
+  </div>
+</div>
+
+</body>
+
+</html>
