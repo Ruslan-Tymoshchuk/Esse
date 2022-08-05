@@ -1,4 +1,4 @@
-package com.rtim.esse.controler;
+package com.rtim.esse.controller;
 
 import java.util.Optional;
 import org.springframework.stereotype.Controller;
