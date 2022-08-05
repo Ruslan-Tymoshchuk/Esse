@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.rtim.esse.dto.CartDto;
-import com.rtim.esse.dto.DictionaryDto;
-import com.rtim.esse.dto.DocumentDto;
 import com.rtim.esse.model.Sorter;
 import com.rtim.esse.service.CartService;
 
@@ -29,8 +27,7 @@ public class CartController {
     }
 
     @GetMapping
-    public String getAllSortedCarts(@RequestParam Optional<Sorter> sort, CartDto cartDto, DocumentDto documentDto,
-            DictionaryDto dictionaryDto, Model model) {
+    public String getAllSortedCarts(@RequestParam Optional<Sorter> sort, CartDto cartDto, Model model) {
         String sortBy = sort.orElse(Sorter.NAME).getValue();
         model.addAttribute("allCarts", cartService.findAllCartsSortedBy(sortBy));
         return PAGE_ALL_CARTS;
